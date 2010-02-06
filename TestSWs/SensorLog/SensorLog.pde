@@ -28,7 +28,7 @@ The goal of the code is:
 //=============================================================================
 
 unsigned char state=0;
-unsigned int delay_var = 9500;
+unsigned int delay_var = 10000;
 
 //=============================================================================
 //
@@ -114,12 +114,12 @@ void loop ()
                 if (state == 0)
                 {
                     Serial.println("-- Start logging Pitch: PitchACC, ZACC, PitchGY --");
-                    Serial.print(" Start time:"); Serial.println(milis(),DEC);
+                    Serial.print(" Start time:"); Serial.println(millis(),DEC);
                     state = 'p';
                 }
                 else if (state == 'p')
                 {
-                    Serial.print(" End time:"); Serial.println(milis(),DEC);
+                    Serial.print(" End time:"); Serial.println(millis(),DEC);
                     Serial.println("-- Stop logging Pith --");
                     state = 0;
                 }
@@ -128,12 +128,12 @@ void loop ()
                 if (state == 0)
                 {
                     Serial.println("-- Start logging Roll: RollACC, ZACC, RollGY --");
-                    Serial.print(" Start time:"); Serial.println(milis(),DEC);
+                    Serial.print(" Start time:"); Serial.println(millis(),DEC);
                     state = 'r';
                 }
                 else if (state == 'r')
                 {
-                    Serial.print(" End time:"); Serial.println(milis(),DEC);
+                    Serial.print(" End time:"); Serial.println(millis(),DEC);
                     Serial.println("-- Stop logging Roll --");
                     state = 0;
                 }
