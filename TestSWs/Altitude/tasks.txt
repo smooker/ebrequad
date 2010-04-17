@@ -1,0 +1,12 @@
+1- test SW at is it. does it works?? fine!!!
+2- Review configuration to get max resolution VS time refresh:
+	High resolution mode --> 1.8 Hz  Enought???
+	High speed mode      --> 9   Hz
+
+	17-bit resolution (9cm of air column)
+	15-bit resolution (18cm of air column) with high speed data read (9Hz)
+
+3a- Update driver to c with new API for the Ebrequad
+3b- Driver must be configurable runtime to test with high RES or high speed
+4- Configure SPI for 500kbps (transmission ~120us)
+5- Create an Interrupt handled driver for cyclical reading, less CPU load
