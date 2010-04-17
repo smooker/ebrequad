@@ -1,0 +1,60 @@
+TODO list for Balancer:
+
+A) Code with dispatcher and FlightAngle
+- DONE: Compilable code with Ardunio.
+- DONE: Compilable code with MPLAB.
+- DONE: Test all functions with MPLAB and filling with log file.
+- DONE: Add debug pins in all function and execute in Arduino and check execution times.
+- Check filtering time execution using float instead of INT.
+- DONE: Compilable code with AVRStudio, then debug is possible!!!
+- Timming with AVR is not correct?? review with degun pin with real Arduino
+
+B) Add motors
+- Prepare new PWM driver for timer 5 with 10bit resolution (not 7bit like Aeroquad)
+- Test motors driver behavior in time, OSC, pulses generation 1ms to 2ms every 4ms. change correctly?
+- Create custom commands in order to control motor signals.
+- DELAYED: until first tests are done. Check with lear OSC? 
+
+
+C) Add SerialCom driver
+- Send all sensor data in compatible mode with AeroquadConfiguration
+- Create custom commands in order to change filtering, etc.
+
+D) Add PID
+- Create loop control.
+- Create custom commands in order to change loop target angle.
+- Or use potentiomenter to set the target pos.
+- Create custom commands in order to change PID values.
+- Check execution times.
+
+E) Test with real sensors, motors
+- Zero 0 calculation.
+- drift of 0 angle calculation.
+- response of the angle calculation.
+- Adjustment of the Kalman filter.
+- does PID works? adjust values.
+
+F) Add transmitter driver to control balancer with Transmitter stick.
+- Check ISR transmitter implementation, can InputCapture used? Less CPU, less jitter.
+- Assure minumum resolution.
+- Noise filtering like sensors.
+- Prepare driver API with request angle (-15,+15 deg), not 1000-2000 signal
+
+
+
+EXTRA) - Extract Gravity from ACC data and detect if there are lateral movements to correct position!! if it works, great!!!! Let's make something equal to MK!!
+       - Create a new ADC driver for a free running conversion of all the channels, using ISR for data reading and MUX selection, then CPU will be reduced a lot!! 600us less each 4ms (18% less). But before it, try to increase ADC rate to double, usign prescales 64 instead of 128, resolution shoud be not decreased.
+         (see quad_mini_20.zip example)
+
+
+INFO TESTS!
+
+- Execution measurement of:
+
+    FlightAngle_GetAccData(); +
+    FlightAngle_GetGyroData(); ------> 0,80ms (both gets)
+    FlightAngle_Processing_Gyro(); --> 0,27ms
+    FlightAngle_Processing_Acc();  --> 0,60ms
+
+Between 1,6ms and 1,7ms. --> 40% CPU LOAD!!!
+If dataRAW filtering then 1,4 1,5
